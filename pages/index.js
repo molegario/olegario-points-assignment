@@ -13,19 +13,7 @@ export default function AppRoot() {
   }
 
   return <Fragment>
-
-    <Hero />    
-
-    {/* <ul>
-      {
-        ['2019', '2020', '2021', '2022'].map(
-          tt=><li key={`year_${tt}`}>
-            <button onClick={navigateClick(tt)}>{tt}</button>
-          </li>
-        )
-      }
-    </ul> */}
+    <Hero />
     <YearSelector navigateClick={navigateClick}/>
-
   </Fragment>;
 }

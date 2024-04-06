@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
+import HeaderResults from "../../../components/results/header-results";
 
 export default function CalculateResultsPage({ year, yearTaxBrackets }) {
   const router = useRouter();
@@ -71,40 +72,49 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
     router.push('/')
   }
 
-  return <div>
-    <button onClick={onBackNavigate}>Select Another Year</button>
-    <h1>CALCULATE:: {year}</h1>
-    <form onSubmit={onSubmitHandler} >
-      {
-        bracketResults?.length === 0 && isValidating && <p className="center">Loading...</p>
-      }
-      {
-        (
-          taxBrackets.length > 0
-        ) && <Fragment>
-          <input type="number" step='0.01' id='income' name='income' placeholder="please enter your income" ref={incomeRef} required />
-          <button>Calculate</button>
-        </Fragment>
-      }
-      {
-        (
-          error ||
-          !isValidating &&
-          taxBrackets.length === 0
-        ) && <button type='button' onClick={()=>mutate()}>refresh</button>
-      }
-    </form>
-    <div>
-      <p className="center">{
-        error ? <p style={{color:"red"}}>{error.message}</p> : null
-      }</p>
-      <ul>
-      {
-        bracketResults?.map((uu, idx)=><li key={idx}>{uu.taxable_income}---{uu.rate}</li>)
-      }
-      </ul>
-    </div>
-  </div>
+  return <Fragment>
+    <HeaderResults year={year}/>
+    <main>
+    
+      <form onSubmit={onSubmitHandler} >
+        {
+          bracketResults?.length === 0 && isValidating && <p className="center">Loading...</p>
+        }
+        {
+          (
+            taxBrackets.length > 0
+          ) && <Fragment>
+            <input type="number" step='0.01' id='income' name='income' placeholder="please enter your income" ref={incomeRef} required />
+            <button>Calculate</button>
+          </Fragment>
+        }
+        {
+          (
+            error ||
+            !isValidating &&
+            taxBrackets.length === 0
+          ) && <button type='button' onClick={()=>mutate()}>refresh</button>
+        }
+      </form>
+
+
+
+
+      <div>
+        <p className="center">{
+          error ? <p style={{color:"red"}}>{error.message}</p> : null
+        }</p>
+        <ul>
+        {
+          bracketResults?.map((uu, idx)=><li key={idx}>{uu.taxable_income}---{uu.rate}</li>)
+        }
+        </ul>
+      </div>
+
+    </main>
+
+
+  </Fragment>
 }
 
 //generates pre-rendered data on navigation

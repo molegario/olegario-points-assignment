@@ -26,7 +26,8 @@
 }
 
 .hero h1 {
-  font-size: var(--size-16);
+  text-transform: uppercase;
+  font-size: var(--size-10);
   margin: var(--size-4) 0;
   color: var(--color-grey-300);
 }
