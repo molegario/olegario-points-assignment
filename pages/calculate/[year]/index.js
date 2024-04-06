@@ -2,10 +2,12 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import HeaderResults from "../../../components/results/header-results";
+import { Slider } from "primereact/slider";
+import 'primereact/resources/themes/lara-light-cyan/theme.css'
+import { InputText } from "primereact/inputtext";
+import IncomeForm from "../../../components/results/income-form";
 
 export default function CalculateResultsPage({ year, yearTaxBrackets }) {
-  const router = useRouter();
-  const incomeRef = useRef();
   const [taxBrackets, setTaxBrackets] = useState(yearTaxBrackets)
   const [bracketResults, setBracketResults] = useState();
 
@@ -34,8 +36,8 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
   );
 
   //process data for breakdown calculation
-  function processFormData() {
-    let totalincome = incomeRef.current.value;
+  function processFormData(totalincome) {
+    // let totalincome = incomeRef.current.value;
     const bracketResults = taxBrackets.reduce(
       (acc, itm) => {
         const taxable_income = itm.max -itm.min;
@@ -62,42 +64,21 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
     return bracketResults;
   }
 
-  function onSubmitHandler(evt) {
-    evt.preventDefault();
-    const results = processFormData();
+  function onSubmitHandler(slidervalue) {
+    const results = processFormData(slidervalue);
     setBracketResults(results);
-  }
-
-  function onBackNavigate() {
-    router.push('/')
   }
 
   return <Fragment>
     <HeaderResults year={year}/>
     <main>
-    
-      <form onSubmit={onSubmitHandler} >
-        {
-          bracketResults?.length === 0 && isValidating && <p className="center">Loading...</p>
-        }
-        {
-          (
-            taxBrackets.length > 0
-          ) && <Fragment>
-            <input type="number" step='0.01' id='income' name='income' placeholder="please enter your income" ref={incomeRef} required />
-            <button>Calculate</button>
-          </Fragment>
-        }
-        {
-          (
-            error ||
-            !isValidating &&
-            taxBrackets.length === 0
-          ) && <button type='button' onClick={()=>mutate()}>refresh</button>
-        }
-      </form>
-
-
+      <IncomeForm
+        onFormSubmitHandler={onSubmitHandler}
+        taxBrackets={taxBrackets}
+        error={error}
+        isValidating={isValidating}
+        mutate={mutate}
+      />
 
 
       <div>
@@ -111,9 +92,9 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
         </ul>
       </div>
 
+
+
     </main>
-
-
   </Fragment>
 }
 
