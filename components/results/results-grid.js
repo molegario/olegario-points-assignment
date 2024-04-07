@@ -11,26 +11,18 @@ export default function ResultsGrid({bracketResults}) {
       totaltax: (+ttt.taxable_income * +ttt.rate).toFixed(2),
     })
   );
-
   const totalincome = xformedResults.reduce(
     (acc, itm)=>{
       return acc + +itm.income
     },
     0
   );
-
   const totaltaxes = xformedResults.reduce(
     (acc, itm)=>{
       return acc + +itm.totaltax
     },
     0
   );
-  // const totaltaxes = bracketResults.reduce(
-  //   (acc, itm)=>{
-  //     return acc + +itm.taxable_income
-  //   },
-  //   0
-  // );
   const  effectivetaxrate = totalincome === 0 ? 0 : ((totaltaxes / totalincome) * 100.0); 
 
   return <article className={classes.content}>
@@ -40,11 +32,10 @@ export default function ResultsGrid({bracketResults}) {
       <Column field='rate' header='Tax Rate'></Column>
       <Column field='totaltax' header='Bracket Tax Total'></Column>
     </DataTable>
-    <div className={classes.totals}>
-      <span>Total taxable income: ${totalincome.toFixed(2)} </span>
-      {/* <span>Totals</span> */}
-      <span>Total tax: ${totaltaxes.toFixed(2)}</span>
-      <span>Effective taxrate: {effectivetaxrate.toFixed(2)}%</span>
-    </div>
+    <ul className={classes.totals}>
+      <li className={classes.hdr}><span>Total taxable income:</span><span>Total tax:</span><span>Effective taxrate:</span></li>
+      <li></li>
+      <li><span>${totalincome.toFixed(2)}</span><span>${totaltaxes.toFixed(2)}</span><span>{effectivetaxrate.toFixed(2)}%</span></li>
+    </ul>
   </article>
 }

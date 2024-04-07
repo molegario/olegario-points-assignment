@@ -1,10 +1,7 @@
-// import { useRouter } from "next/router";
 import { Fragment, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import HeaderResults from "../../../components/results/header-results";
-// import { Slider } from "primereact/slider";
 import 'primereact/resources/themes/lara-light-cyan/theme.css'
-// import { InputText } from "primereact/inputtext";
 import IncomeForm from "../../../components/results/income-form";
 import ResultsGrid from "../../../components/results/results-grid";
 
@@ -38,7 +35,6 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
 
   //process data for breakdown calculation
   function processFormData(totalincome) {
-    // let totalincome = incomeRef.current.value;
     const bracketResults = taxBrackets.reduce(
       (acc, itm) => {
         const taxable_income = itm.max - itm.min;

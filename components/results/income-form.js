@@ -29,11 +29,15 @@ export default function IncomeForm({
 
   //error or no rates available
   if(
+    // true ||
     error ||
     !isValidating &&
     taxBrackets.length === 0
   ) {
-    return <p className='center'><button type='button' onClick={()=>mutate()}>refresh</button></p>
+    return <div className={classes.recovery}>
+      <button type='button' onClick={()=>mutate()}>refresh</button>
+      <div className={classes.note}>Temporarily unable to retrieve the rates for this year.  Press refresh to try again.</div>
+    </div>
   }
 
   return <form onSubmit={handleFormSubmit} className={classes.form}>
