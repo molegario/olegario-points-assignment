@@ -66,7 +66,7 @@ export default function IncomeForm({
           }}
           xmin={1}
           xmax={1000000}
-          xstep={10}
+          xstep={1}
         />
       </div>
     </div>
