@@ -5,6 +5,7 @@ import 'primereact/resources/themes/lara-light-cyan/theme.css'
 import IncomeForm from "../../../components/results/income-form";
 import ResultsGrid from "../../../components/results/results-grid";
 import { getSupportedYears } from "../../../lib/supported-years";
+import Head from "next/head";
 
 export default function CalculateResultsPage({ year, yearTaxBrackets }) {
   const [taxBrackets, setTaxBrackets] = useState(yearTaxBrackets)
@@ -77,6 +78,10 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
   }
 
   return <Fragment>
+    <Head>
+      <title>Your tax assessment for {year}</title>
+      <meta name="description" content={`The breakdown of a given salary for the year ${year}`}/>
+    </Head>
     <HeaderResults year={year}/>
     <main>
       <IncomeForm
