@@ -31,8 +31,10 @@
   color: var(--color-grey-800);
   width: 90%;
   max-width: 40rem;
-  /* margin: auto; */
   text-align: center;
 }
 
+.questions {
+  font-size: var(--size-5);
+}
 

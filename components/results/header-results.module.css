@@ -60,9 +60,6 @@
     font-size: var(--size-8);
     margin-left: 2rem;
   }
-  
-
-
 }
 
 .sticky {
@@ -71,6 +68,7 @@
   width: 100%;
 }
 
+.sticky + article,
 .sticky + main {
   padding-top: 5rem;
 }
