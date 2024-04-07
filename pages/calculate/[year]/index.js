@@ -1,11 +1,12 @@
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { Fragment, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import HeaderResults from "../../../components/results/header-results";
-import { Slider } from "primereact/slider";
+// import { Slider } from "primereact/slider";
 import 'primereact/resources/themes/lara-light-cyan/theme.css'
-import { InputText } from "primereact/inputtext";
+// import { InputText } from "primereact/inputtext";
 import IncomeForm from "../../../components/results/income-form";
+import ResultsGrid from "../../../components/results/results-grid";
 
 export default function CalculateResultsPage({ year, yearTaxBrackets }) {
   const [taxBrackets, setTaxBrackets] = useState(yearTaxBrackets)
@@ -40,22 +41,31 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
     // let totalincome = incomeRef.current.value;
     const bracketResults = taxBrackets.reduce(
       (acc, itm) => {
-        const taxable_income = itm.max -itm.min;
+        const taxable_income = itm.max - itm.min;
         if(totalincome === 0) {
           return acc.concat({
             taxable_income: 0,
-            rate: itm.rate
+            rate: itm.rate,
+            min: itm.min,
+            max: itm.max,
           });
         }
         if(totalincome > taxable_income) {
           totalincome = totalincome - taxable_income;
-          return acc.concat([{taxable_income, rate: itm.rate}])
+          return acc.concat([{
+            taxable_income, 
+            rate: itm.rate,
+            min: itm.min,
+            max: itm.max,
+          }])
         } else {
           const taxable_income = totalincome;
           totalincome = 0;
           return acc.concat([{
             taxable_income,
-            rate: itm.rate
+            rate: itm.rate,
+            min: itm.min,
+            max: itm.max,
           }])
         }
       },
@@ -79,21 +89,12 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
         isValidating={isValidating}
         mutate={mutate}
       />
-
-
       <div>
-        <p className="center">{
-          error ? <p style={{color:"red"}}>{error.message}</p> : null
-        }</p>
-        <ul>
         {
-          bracketResults?.map((uu, idx)=><li key={idx}>{uu.taxable_income}---{uu.rate}</li>)
+          bracketResults?.length > 0 && 
+            <ResultsGrid bracketResults={bracketResults}/>
         }
-        </ul>
       </div>
-
-
-
     </main>
   </Fragment>
 }

@@ -39,7 +39,7 @@ export default function IncomeForm({
   return <form onSubmit={handleFormSubmit} className={classes.form}>
     
     <div className={classes.controls}>
-      <h4>Set your income for this year below then press the green button for your results.</h4>
+      <h4>Set your income for this year below and then press the green button for your results.</h4>
       <div className={classes.control}>
         <Slider
           id='income'

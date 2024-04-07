@@ -10,10 +10,9 @@ export default function HeaderResults({year}) {
 
   return <header className={headerCt}>
     <Link href='/'>
-      <FaChevronLeft /><span>Year select</span>
+      <FaChevronLeft /><span>another time?</span>
     </Link>
     <Logo year={year} />
-    {/* <h1>{year}</h1> */}
   </header>
 
 }
