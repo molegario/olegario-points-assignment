@@ -1,8 +1,46 @@
+## Taxcalculator Application: Overview
+
+The Taxcalculator Application is a standalone application that can be installed on any webserver with NodeJS v18.18.0+.  The application requires a local installation of the Taxrates server provided by the Points development team and running on port 5001.  For more information on the server provided please refer to the README.md of the project at this [`GIT repository`](https://github.com/Points/interview-test-server).
+
+Once installed and browsable on the default port of 3000, one can navigate to the root page of the applcations and begin to evaluate any income between $1 to $1000000 for a breakdown of the tax rates being applied over the ranges that the income exceeds
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Using the Taxcalculator Application
 
-First, run the development server:
+By default the application loads on port 3000.  Visitors can browse to the application webroot at port 3000 to access the application landing page.
+
+### Selecting the Year of Assessment
+
+The landing page offers visitors the option to select the year at which they wish to perform the assessment of a desired income.  The supported years are listed on the lower half of the landing page by buttons labelled with the supporting year.  Upon selection the application will request the rates for the year selected and redirect the visitor to the assessment page of the application.
+
+### Setting the Income to Assess
+
+At the top of the assessment page visitor can use the slider bar shown to select a value for the income to assess or directly enter the amount to the nearest penny in the text field above the slider bar.  Once the desired income amout is selected visitors can press the 'calculate' button below the slider bar to display the results of the analysis.
+
+### Reviewing the Assessment Results
+
+Upon pressing the 'calculate' button a breakdown of the given income is shown in a table format below.  New assessments can be performed within the same year by simply readjusting the income slider and hitting the 'calculate' button the regenerate the results display.
+
+### Issues Accessing the Rates Server
+
+The Rates Server occassionally becomes inaccessible or return errors on valid queries.  For this reason the assessment page takes advantage of NextJS getServerSideProps to attempt a prepull of the rates before rendering the assessment page.  On the rendering of the assesment page another client side fetch is done for the rates.  Between the 2 rate pulls before and after the rendering of the page the rates data should succeed.
+
+Should a visitor experience a momentary failure of both attempts to obtain the rates for the selected year they will be alternatively shown a recovery window instead of the income selector on the assessment page.  The recovery window will then prompt the visitor to re-try pulling the rates for the selected year.  On a successful re-pull of the rates the assessment page will then show the income selector form.
+
+### Supported Years
+
+The routes on the application have been coded to reflect the year of assessment.  Visitors can bookmark directly to the specific year of assessment for convenience.  Since the provided rates server only provides data for years between 2019 - 2022, the options on the front page lead to only supported years.  Any attempt to access unsupported year via direct linking will be met with a custom 404 to warn visitors of the unavailable route and a link to navigate back to the application landing page. 
+
+## Starting up the Webserver
+First install the project using your choice of package manager (npm, yarn):
+```bash
+npm install
+# or
+yarn install
+```
+
+Afterwards, run the development server:
 
 ```bash
 npm run dev
@@ -10,13 +48,7 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
 ## Learn More
 

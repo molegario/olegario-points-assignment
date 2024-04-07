@@ -1,7 +1,8 @@
-import { InputText } from 'primereact/inputtext';
+import InputSlider from 'react-input-slider';
 import classes from './income-form.module.css';
-import { Slider } from 'primereact/slider';
 import { useState } from 'react';
+
+
 export default function IncomeForm({
   onFormSubmitHandler,
   taxBrackets,
@@ -21,15 +22,16 @@ export default function IncomeForm({
 
   //data is still loading
   if(
+    // true || //for loading degugging
     taxBrackets?.length === 0 &&
     isValidating
   ) {
-    return <p>loading...</p>
+    return <p className={classes.loadingmsg}>loading rates...</p>
   }
 
   //error or no rates available
   if(
-    // true ||
+    // true || //for fail/recovery debug
     error ||
     !isValidating &&
     taxBrackets.length === 0
@@ -41,19 +43,33 @@ export default function IncomeForm({
   }
 
   return <form onSubmit={handleFormSubmit} className={classes.form}>
-    
     <div className={classes.controls}>
       <h4>Set your income for this year below and then press the green button for your results.</h4>
       <div className={classes.control}>
-        <Slider
-          id='income'
+        <input 
+          type='number'
           value={sliderValue}
-          onChange={gg=>setSliderValue(gg.value)}
-          max={1000000}
           min={1}
+          max={1000000}
+          step={0.01}
+          onChange={
+            evt=>{
+              setSliderValue(evt.target.value);
+            }
+          }
+        />
+        <InputSlider 
+          axis='x'
+          x={sliderValue}
+          onChange={({x:xxx})=>{
+            return setSliderValue(xxx);
+          }}
+          xmin={1}
+          xmax={1000000}
+          xstep={10}
         />
       </div>
     </div>
-    <button>${sliderValue ?? 0}.00</button>
+    <button>${(+sliderValue ?? 0).toFixed(2)}</button>
   </form>;
 }

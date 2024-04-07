@@ -25,7 +25,7 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
   useEffect(
     ()=>{
       //stomps data only if post render pull has valid data
-      if(data?.tax_brackets) {
+      if(data?.tax_brackets && taxBrackets?.length === 0) {
         //stomp pre-rendered data with new rates data for year
         setTaxBrackets(data.tax_brackets);
       }
