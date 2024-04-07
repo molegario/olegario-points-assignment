@@ -4,6 +4,7 @@ import HeaderResults from "../../../components/results/header-results";
 import 'primereact/resources/themes/lara-light-cyan/theme.css'
 import IncomeForm from "../../../components/results/income-form";
 import ResultsGrid from "../../../components/results/results-grid";
+import { getSupportedYears } from "../../../lib/supported-years";
 
 export default function CalculateResultsPage({ year, yearTaxBrackets }) {
   const [taxBrackets, setTaxBrackets] = useState(yearTaxBrackets)
@@ -102,7 +103,9 @@ export async function getServerSideProps(context) {
 
   //check if supported year otherwise use 404 to warn of 
   //unsupported path
-  if(!['2019', '2020', '2021', '2022'].includes(year)) {
+  const supportedYears = getSupportedYears();
+
+  if(!supportedYears.includes(year)) {
     return {
       notFound: true
     };
