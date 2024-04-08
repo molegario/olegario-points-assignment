@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { Fragment } from "react";
 import Hero from "../components/home/Hero";
 import YearSelector from "../components/home/year-selector";
-import Head from "next/head";
 
 export default function AppRoot() {
   const router = useRouter()
