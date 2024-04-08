@@ -24,7 +24,7 @@ export default function ResultsGrid({bracketResults}) {
     },
     0
   );
-  const  effectivetaxrate = totalincome === 0 ? 0 : ((totaltaxes / totalincome) * 100.0); 
+  const effectivetaxrate = totalincome === 0 ? 0 : ((totaltaxes / totalincome) * 100.0); 
 
   return <article className={classes.content}>
     <DataTable value={xformedResults} tableStyle={{minWidth: '420px'}}>
