@@ -38,5 +38,5 @@ export default function ResultsGrid({bracketResults}) {
       totaltaxes={totaltaxes}
       effectivetaxrate={effectivetaxrate}
     />
-  </article>
+  </article>;
 }

@@ -135,12 +135,5 @@ export async function getServerSideProps(context) {
           peramanent: false,
         }
       };
-    // return {
-    //   notFound: true
-    // }
-    // res.status(500).json({
-    //   message: 'Rates server is temporarily unreachable.'
-    // })
-    
   }
 }
