@@ -1,11 +1,11 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import useSWR from "swr";
 import HeaderResults from "../../../components/results/header-results";
-import 'primereact/resources/themes/lara-light-cyan/theme.css'
 import IncomeForm from "../../../components/results/income-form";
 import ResultsGrid from "../../../components/results/results-grid";
 import { getSupportedYears } from "../../../lib/supported-years";
 import Head from "next/head";
+import 'primereact/resources/themes/lara-light-cyan/theme.css'
 
 export default function CalculateResultsPage({ year, yearTaxBrackets }) {
   const [taxBrackets, setTaxBrackets] = useState(yearTaxBrackets)
