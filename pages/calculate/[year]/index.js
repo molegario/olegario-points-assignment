@@ -83,7 +83,7 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
       <meta name="description" content={`The breakdown of a given salary for the year ${year}`}/>
     </Head>
     <HeaderResults year={year}/>
-    <article>
+    <section>
       <IncomeForm
         onFormSubmitHandler={onSubmitHandler}
         taxBrackets={taxBrackets}
@@ -97,7 +97,7 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
             <ResultsGrid bracketResults={bracketResults}/>
         }
       </div>
-    </article>
+    </section>
   </Fragment>
 }
 

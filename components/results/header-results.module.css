@@ -68,6 +68,7 @@
   width: 100%;
 }
 
-.sticky + article {
+.sticky + article,
+.sticky + section {
   padding-top: 5rem;
 }
