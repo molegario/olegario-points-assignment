@@ -5,7 +5,7 @@ export default function UnavailablePanel() {
   return <div className={classes.alert}>
     <h1>503</h1>
     <p>
-      Our Rates server is temprarily unreachable.  Please verify and follow the link below.
+      Our Rates server is temporarily unreachable.  Please verify and follow the link below.
     </p>
     <Link href='/'>another time?</Link>
   </div>;
