@@ -117,14 +117,30 @@ export async function getServerSideProps(context) {
   }
 
   //otherwise attempt pre-rendered pull
-  const resp = await fetch(`http://localhost:5001/tax-calculator/tax-year/${year}`);
-  const respJson = await resp.json();
-  const { tax_brackets=[] } = respJson;
-
-  return {
-    props: {
-      yearTaxBrackets: tax_brackets, //pre-render data
-      year, //post year argument for display
-    }
-  };
+  let resp;
+  try {
+    resp = await fetch(`http://localhost:5001/tax-calculator/tax-year/${year}`);
+    const respJson = await resp.json();
+    const { tax_brackets=[] } = respJson;
+    return {
+      props: {
+        yearTaxBrackets: tax_brackets, //pre-render data
+        year, //post year argument for display
+      }
+    };
+  } catch (err) {
+      return {
+        redirect: {
+          destination: '/unavailable',
+          peramanent: false,
+        }
+      };
+    // return {
+    //   notFound: true
+    // }
+    // res.status(500).json({
+    //   message: 'Rates server is temporarily unreachable.'
+    // })
+    
+  }
 }
