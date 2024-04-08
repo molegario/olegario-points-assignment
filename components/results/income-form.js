@@ -57,6 +57,7 @@ export default function IncomeForm({
               setSliderValue(evt.target.value);
             }
           }
+          data-testid="income-input"
         />
         <InputSlider 
           axis='x'
@@ -67,9 +68,14 @@ export default function IncomeForm({
           xmin={1}
           xmax={1000000}
           xstep={1}
+          data-testid="income-slider"
         />
       </div>
     </div>
-    <button>${(+sliderValue ?? 0).toFixed(2)}</button>
+    <button
+      data-testid="req-assessment-btn"
+    >
+    ${(+sliderValue ?? 0).toFixed(2)}
+    </button>
   </form>;
 }
