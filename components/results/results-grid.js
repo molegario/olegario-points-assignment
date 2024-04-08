@@ -1,6 +1,7 @@
 import { DataTable } from 'primereact/datatable';
 import classes from './results-grid.module.css';
 import { Column } from 'primereact/column';
+import TotalsBar from './totals-bar';
 
 export default function ResultsGrid({bracketResults}) {
   const xformedResults = bracketResults.map(
@@ -32,14 +33,10 @@ export default function ResultsGrid({bracketResults}) {
       <Column field='income' header='Taxable Income' align='right' headerStyle={{lineHeight: '1.2'}}></Column>
       <Column field='totaltax' header='Bracket Tax Total' align='right' headerStyle={{lineHeight: '1.2'}}></Column>
     </DataTable>
-    {/**
-     * TODO: to component
-     */}
-    <ul className={classes.totals}>
-      <li className={classes.hdr}><span>Total taxable income:</span><span>Total tax:</span><span>Effective taxrate:</span></li>
-      <li></li>
-      <li><span>${totalincome.toFixed(2)}</span><span>${totaltaxes.toFixed(2)}</span><span>{effectivetaxrate.toFixed(2)}%</span></li>
-    </ul>
-
+    <TotalsBar 
+      totalincome={totalincome}
+      totaltaxes={totaltaxes}
+      effectivetaxrate={effectivetaxrate}
+    />
   </article>
 }

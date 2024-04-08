@@ -1,0 +1,26 @@
+.totals {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-rows: 1fr .6rem .8fr;
+  font-size: var(--size-4);
+}
+
+.totals li {
+  display: grid;
+  grid-template-columns: 2fr 1.25fr 1.5fr;
+}
+
+.totals li.hdr span {
+  font-weight: bold;
+}
+
+.totals span {
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+
+  .totals {
+    font-size: var(--size-5);
+  }
+}
