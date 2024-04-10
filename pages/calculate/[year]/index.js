@@ -25,9 +25,9 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
   );
 
   useEffect(
-    ()=>{
+    () => {
       //stomps data only if post render pull has valid data
-      if(data?.tax_brackets && taxBrackets?.length === 0) {
+      if (data?.tax_brackets && taxBrackets?.length === 0) {
         //stomp pre-rendered data with new rates data for year
         setTaxBrackets(data.tax_brackets);
       }
@@ -37,10 +37,11 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
 
   //process data for breakdown calculation
   function processFormData(totalincome) {
+    let tracktotal = totalincome;
     const bracketResults = taxBrackets.reduce(
       (acc, itm) => {
         const taxable_income = itm.max - itm.min;
-        if(totalincome === 0) {
+        if (tracktotal === 0) {
           return acc.concat({
             taxable_income: 0,
             rate: itm.rate,
@@ -48,17 +49,17 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
             max: itm.max,
           });
         }
-        if(totalincome > taxable_income) {
-          totalincome = totalincome - taxable_income;
+        if (tracktotal > taxable_income) {
+          tracktotal = tracktotal - taxable_income;
           return acc.concat([{
-            taxable_income, 
+            taxable_income,
             rate: itm.rate,
             min: itm.min,
             max: itm.max,
           }])
         } else {
-          const taxable_income = totalincome;
-          totalincome = 0;
+          const taxable_income = tracktotal;
+          tracktotal = 0;
           return acc.concat([{
             taxable_income,
             rate: itm.rate,
@@ -80,9 +81,9 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
   return <Fragment>
     <Head>
       <title>Your tax assessment for {year}</title>
-      <meta name="description" content={`The breakdown of a given salary for the year ${year}`}/>
+      <meta name="description" content={`The breakdown of a given salary for the year ${year}`} />
     </Head>
-    <HeaderResults year={year}/>
+    <HeaderResults year={year} />
     <section>
       <IncomeForm
         onFormSubmitHandler={onSubmitHandler}
@@ -93,8 +94,8 @@ export default function CalculateResultsPage({ year, yearTaxBrackets }) {
       />
       <div>
         {
-          bracketResults?.length > 0 && 
-            <ResultsGrid bracketResults={bracketResults}/>
+          bracketResults?.length > 0 &&
+          <ResultsGrid bracketResults={bracketResults} />
         }
       </div>
     </section>
@@ -110,7 +111,7 @@ export async function getServerSideProps(context) {
   //unsupported path
   const supportedYears = getSupportedYears();
 
-  if(!supportedYears.includes(year)) {
+  if (!supportedYears.includes(year)) {
     return {
       notFound: true
     };
@@ -121,7 +122,7 @@ export async function getServerSideProps(context) {
   try {
     resp = await fetch(`http://localhost:5001/tax-calculator/tax-year/${year}`);
     const respJson = await resp.json();
-    const { tax_brackets=[] } = respJson;
+    const { tax_brackets = [] } = respJson;
     return {
       props: {
         yearTaxBrackets: tax_brackets, //pre-render data
@@ -129,11 +130,11 @@ export async function getServerSideProps(context) {
       }
     };
   } catch (err) {
-      return {
-        redirect: {
-          destination: '/unavailable',
-          peramanent: false,
-        }
-      };
+    return {
+      redirect: {
+        destination: '/unavailable',
+        peramanent: false,
+      }
+    };
   }
 }
