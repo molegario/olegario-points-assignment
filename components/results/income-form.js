@@ -32,7 +32,7 @@ export default function IncomeForm({
   //error or no rates available
   if(
     // true || //for fail/recovery debug
-    error ||
+    error &&
     !isValidating &&
     taxBrackets.length === 0
   ) {
@@ -49,8 +49,8 @@ export default function IncomeForm({
         <input 
           type='number'
           value={sliderValue}
-          min={1}
-          max={1000000}
+          min={0}
+          max={5000000}
           step={0.01}
           onChange={
             evt=>{
@@ -65,9 +65,9 @@ export default function IncomeForm({
           onChange={({x:xxx})=>{
             return setSliderValue(xxx);
           }}
-          xmin={1}
-          xmax={1000000}
-          xstep={1}
+          xmin={0}
+          xmax={5000000}
+          xstep={10}
           data-testid="income-slider"
         />
       </div>
