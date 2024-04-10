@@ -8,7 +8,7 @@ date: '2024/04/07'
 
 The Taxcalculator Application is a standalone application that can be installed on any webserver with NodeJS v18.18.0+.  The application requires a local installation of the Taxrates server provided by the Points development team and running on port 5001.  For more information on the server provided please refer to the README.md of the project at this [GIT-repository](https://github.com/Points/interview-test-server).
 
-Once installed and browsable on the default port of 3000, one can navigate to the root page of the applcations and begin to evaluate any income between $1 to $1000000 for a breakdown of the tax rates being applied over the ranges that the income exceeds. At the very end the report you will find the resulting total taxed income, the total tax to be paid, and the effective tax rate calculated from the totals.
+Once installed and browsable on the default port of 3000, one can navigate to the root page of the applcations and begin to evaluate any income between $0 to $5000000 for a breakdown of the tax rates being applied over the ranges that the income exceeds. At the very end the report you will find the resulting total taxed income, the total tax to be paid, and the effective tax rate calculated from the totals.
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [create-next-app](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
