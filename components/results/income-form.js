@@ -33,7 +33,7 @@ export default function IncomeForm({
     return <p className={classes.loadingmsg}>loading rates...</p>
   }
 
-  //error or no rates available
+  //error and no rates available - double pull fail
   if(
     // true || //for fail/recovery debug
     error &&
