@@ -1,7 +1,11 @@
+const MAX_INCOME_LIMIT = 5000000;
+const MIN_INCOME_LIMIT = 0;
+const SLIDER_STEP = 10;
+const INPUT_STEP = 0.01;
+
 import InputSlider from 'react-input-slider';
 import classes from './income-form.module.css';
 import { useState } from 'react';
-
 
 export default function IncomeForm({
   onFormSubmitHandler,
@@ -12,7 +16,7 @@ export default function IncomeForm({
 }) {
 
   //track income slider
-  const [sliderValue, setSliderValue] = useState(100000)
+  const [sliderValue, setSliderValue] = useState(2000000)
 
   //calculate taxes
   function handleFormSubmit(evt) {
@@ -49,9 +53,9 @@ export default function IncomeForm({
         <input 
           type='number'
           value={sliderValue}
-          min={0}
-          max={5000000}
-          step={0.01}
+          min={MIN_INCOME_LIMIT}
+          max={MAX_INCOME_LIMIT}
+          step={INPUT_STEP}
           onChange={
             evt=>{
               setSliderValue(evt.target.value);
@@ -65,9 +69,9 @@ export default function IncomeForm({
           onChange={({x:xxx})=>{
             return setSliderValue(xxx);
           }}
-          xmin={0}
-          xmax={5000000}
-          xstep={10}
+          xmin={MIN_INCOME_LIMIT}
+          xmax={MAX_INCOME_LIMIT}
+          xstep={SLIDER_STEP}
           data-testid="income-slider"
         />
       </div>
