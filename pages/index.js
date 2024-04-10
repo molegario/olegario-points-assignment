@@ -14,6 +14,6 @@ export default function AppRoot() {
 
   return <Fragment>
     <Hero />
-    <YearSelector navigateClick={navigateClick}/>
+    <YearSelector navigateClick={navigateClick} />
   </Fragment>;
 }

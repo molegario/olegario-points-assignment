@@ -1,3 +1,14 @@
 {
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "pretty-formatter.braceLine": true,
+  "pretty-formatter.bracePadding": true,
+  "pretty-formatter.commentLine": true,
+  "pretty-formatter.comments": true,
+  "pretty-formatter.correct": true,
+  "pretty-formatter.cssInsertLines": true,
+  "pretty-formatter.styleguide": "jslint",
+  "pretty-formatter.spaceClose": true,
+  "pretty-formatter.vertical": true,
+  "pretty-formatter.indentLevel": 2,
+  "pretty-formatter.indentSize": 2
 }
