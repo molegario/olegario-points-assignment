@@ -38,7 +38,7 @@ describe(
         ];
 
         render(<ResultsGrid bracketResults={taxBracketResults}/>);
-        const totalincomevalue = screen.getByText('$7700.00');
+        const totalincomevalue = screen.getByText('$7,700.00');
         expect(totalincomevalue).toBeInTheDocument();
       }
     )

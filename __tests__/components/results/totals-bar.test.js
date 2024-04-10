@@ -13,8 +13,8 @@ describe(
         const totalincome = screen.getByTestId('total-income');
         const totaltaxes = screen.getByTestId('total-taxes');
         const effectiverate = screen.getByTestId('effective-taxrate');
-        expect(totalincome).toHaveTextContent('$71543.00');
-        expect(totaltaxes).toHaveTextContent('$15739.46');
+        expect(totalincome).toHaveTextContent('$71,543.00');
+        expect(totaltaxes).toHaveTextContent('$15,739.46');
         expect(effectiverate).toHaveTextContent('22.00%');
       }
     );
