@@ -79,7 +79,10 @@ export default function IncomeForm({
     <button
       data-testid="req-assessment-btn"
     >
-    ${(+sliderValue ?? 0).toFixed(2)}
+    {(+sliderValue ?? 0).toLocaleString('en-CA', {
+      style: 'currency',
+      currency: 'CAD'
+    })}
     </button>
   </form>;
 }

@@ -14,8 +14,14 @@ export default function TotalsBar({
     </li>
     <li></li>
     <li>
-      <span data-testid='total-income'>${totalincome.toFixed(2)}</span>
-      <span data-testid='total-taxes'>${totaltaxes.toFixed(2)}</span>
+      <span data-testid='total-income'>{totalincome.toLocaleString('en-CA', {
+        style: 'currency',
+        currency: 'CAD'
+      })}</span>
+      <span data-testid='total-taxes'>{totaltaxes.toLocaleString('en-CA', {
+        style: 'currency',
+        currency: 'CAD'
+      })}</span>
       <span data-testid='effective-taxrate'>{effectivetaxrate.toFixed(2)}%</span>
     </li>
   </ul>;
